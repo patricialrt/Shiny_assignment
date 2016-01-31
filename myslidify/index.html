@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guerry k-means clustering</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Guerry k-means clustering">
+  <meta name="author" content="Patricalrt">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Guerry k-means clustering</h1>
+    <h2></h2>
+    <p>Patricalrt<br/>Developing Data Products</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <article data-timings="">
+    <p>##Slide2
+Assignment for Developing Data Products
+Your Shiny Application:
+Write a shiny application with associated supporting documentation. The documentation should be thought of as whatever a user will need to get started using your application.
+-Deploy the application on Rstudio&#39;s shiny server
+-Share the application link by pasting it into the provided text box
+-Share your server.R and ui.R code on github</p>
+
+<p>The application must include the following:
+-Some form of input (widget: textbox, radio button, checkbox, ...)
+-Some operation on the ui input in sever.R
+-Some reactive output displayed as a result of server calculations
+-You must also include enough documentation so that a novice user could use your application.</p>
+
+<p>To fulfill this assignment I modified the kmeans example to a different dataset. I chose the Guerry dataset as I live at the moment in France :) I found it interesting to visualize social data.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <article data-timings="">
+    <p>##Slide3</p>
+
+<pre><code class="r{">#ui.R
+library(shiny)
+library(HistData)
+data(Guerry)
+shinyUI(pageWithSidebar(
+  headerPanel(&#39;Guerry k-means clustering&#39;),
+  sidebarPanel(
+    data(Guerry),
+    selectInput(&#39;xcol&#39;, &#39;X Variable&#39;, names(Guerry)),
+    selectInput(&#39;ycol&#39;, &#39;Y Variable&#39;, names(Guerry),
+                selected=names(Guerry)[[5]]),
+    numericInput(&#39;clusters&#39;, &#39;Cluster count&#39;, 3,
+                 min = 1, max = 9),
+    helpText(&quot;For a description of the Guerry data set please&quot;,
+             &quot;type into your R Console ?Guerry.&quot;),
+    helpText(&quot;For more information on k-means, here&#39;s some first reading:&quot;,
+             &quot;https://en.wikipedia.org/wiki/K-means_clustering&quot;)),
+  mainPanel(plotOutput(&#39;plot1&#39;))))
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <article data-timings="">
+    <p>##Slide4</p>
+
+<pre><code class="r{">#server.R
+library(shiny)
+library(HistData)
+data(Guerry)
+palette(c(&quot;#E41A1C&quot;, &quot;#377EB8&quot;, &quot;#4DAF4A&quot;, &quot;#984EA3&quot;,
+          &quot;#FF7F00&quot;, &quot;#FFFF33&quot;, &quot;#A65628&quot;, &quot;#F781BF&quot;, &quot;#999999&quot;))
+shinyServer(function(input, output, session) {
+  # Combine the selected variables into a new data frame
+  selectedData &lt;- reactive({
+    data(Guerry)
+    Guerry[, c(input$xcol, input$ycol)]})
+  clusters &lt;- reactive({
+   kmeans(selectedData(), input$clusters)})
+  output$plot1 &lt;- renderPlot({
+    par(mar = c(5.1, 4.1, 0, 1))
+    plot(selectedData(),
+         col = clusters()$cluster,
+         pch = 20, cex = 3)
+    points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+  })})
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <article data-timings="">
+    <p>##Slide5</p>
+
+<p>links: 
+<a href="https://github.com/patricialrt/Shiny_assignment">https://github.com/patricialrt/Shiny_assignment</a>
+<a href="http://shiny.rstudio.com/gallery/kmeans-example.html">http://shiny.rstudio.com/gallery/kmeans-example.html</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='NA'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='NA'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='NA'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='NA'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
