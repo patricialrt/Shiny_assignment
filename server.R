@@ -10,6 +10,7 @@ shinyServer(function(input, output, session) {
   
   # Combine the selected variables into a new data frame
   selectedData <- reactive({
+    data("Guerry")
     Guerry[, c(input$xcol, input$ycol)]
   })
   
