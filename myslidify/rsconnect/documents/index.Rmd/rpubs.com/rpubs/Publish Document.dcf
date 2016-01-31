@@ -1,0 +1,7 @@
+name: Publish Document
+account: rpubs
+server: rpubs.com
+bundleId:
+        https://api.rpubs.com/api/v1/document/148880/df74d63548b84414b24803bd5f4a7a35
+url: http://rpubs.com/patricialrt/148880
+when: 1454256018.90111

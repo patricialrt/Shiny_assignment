@@ -6,7 +6,7 @@ job         : Developing Data Products
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : []            # {mathjax, quiz, bootstrap}
+widgets     : []            # {mathjax, quiz, shiny, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
@@ -30,7 +30,7 @@ To fulfill this assignment I modified the kmeans example to a different dataset.
 --- .class #id 
 
 ##Slide3
-```r{
+```r{opts.label = 'shiny'}
 #ui.R
 library(shiny)
 library(HistData)
@@ -49,12 +49,11 @@ shinyUI(pageWithSidebar(
     helpText("For more information on k-means, here's some first reading:",
              "https://en.wikipedia.org/wiki/K-means_clustering")),
   mainPanel(plotOutput('plot1'))))
-}
 
 --- .class #id 
 
 ##Slide4
-```r{
+```r{opts.label = 'shiny'}
 #server.R
 library(shiny)
 library(HistData)
@@ -75,7 +74,6 @@ shinyServer(function(input, output, session) {
          pch = 20, cex = 3)
     points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
   })})
-}
 
 --- .class #id 
 

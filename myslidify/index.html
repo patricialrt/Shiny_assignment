@@ -65,9 +65,9 @@ Write a shiny application with associated supporting documentation. The document
 
 <slide class="class" id="id" style="background:;">
   <article data-timings="">
-    <p>##Slide3</p>
-
-<pre><code class="r{">#ui.R
+    <p>##Slide3
+```r{opts.label = &#39;shiny&#39;}
+#ui.R
 library(shiny)
 library(HistData)
 data(Guerry)
@@ -83,10 +83,8 @@ shinyUI(pageWithSidebar(
     helpText(&quot;For a description of the Guerry data set please&quot;,
              &quot;type into your R Console ?Guerry.&quot;),
     helpText(&quot;For more information on k-means, here&#39;s some first reading:&quot;,
-             &quot;https://en.wikipedia.org/wiki/K-means_clustering&quot;)),
-  mainPanel(plotOutput(&#39;plot1&#39;))))
-}
-</code></pre>
+             &quot;<a href="https://en.wikipedia.org/wiki/K-means_clustering%22)">https://en.wikipedia.org/wiki/K-means_clustering&quot;)</a>),
+  mainPanel(plotOutput(&#39;plot1&#39;))))</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -94,9 +92,9 @@ shinyUI(pageWithSidebar(
 
 <slide class="class" id="id" style="background:;">
   <article data-timings="">
-    <p>##Slide4</p>
-
-<pre><code class="r{">#server.R
+    <p>##Slide4
+```r{opts.label = &#39;shiny&#39;}
+#server.R
 library(shiny)
 library(HistData)
 data(Guerry)
@@ -115,9 +113,7 @@ shinyServer(function(input, output, session) {
          col = clusters()$cluster,
          pch = 20, cex = 3)
     points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
-  })})
-}
-</code></pre>
+  })})</p>
 
   </article>
   <!-- Presenter Notes -->
