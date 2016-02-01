@@ -1,6 +1,4 @@
 library(shiny)
-library(HistData)
-data(Guerry, local=TRUE)
 
 shinyUI(pageWithSidebar(
   headerPanel('Guerry k-means clustering'),
