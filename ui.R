@@ -1,4 +1,6 @@
 library(shiny)
+library(HistData)
+data(Guerry)
 
 shinyUI(pageWithSidebar(
   headerPanel('Guerry k-means clustering'),
@@ -11,8 +13,11 @@ shinyUI(pageWithSidebar(
                  min = 1, max = 9),
     helpText("For a description of the Guerry data set please",
              "type into your R Console ?Guerry."),
-    helpText("For more information on k-means, here's some first reading:",
-             "https://en.wikipedia.org/wiki/K-means_clustering")
+    helpText("k-means clustering aims to partition n observations",
+             "into k clusters in which each observation belongs to",
+             "the cluster with the nearest mean, serving as a prototype",
+             "of the cluster. For more information on k-means, here's some",
+             "first reading: https://en.wikipedia.org/wiki/K-means_clustering")
   ),
   mainPanel(
     plotOutput('plot1')
