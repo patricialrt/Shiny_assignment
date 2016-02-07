@@ -1,11 +1,10 @@
 library(shiny)
 library(HistData)
-data(Guerry)
+data("Guerry")
 
 shinyUI(pageWithSidebar(
   headerPanel('Guerry k-means clustering'),
   sidebarPanel(
-    data(Guerry),
     selectInput('xcol', 'X Variable', names(Guerry)),
     selectInput('ycol', 'Y Variable', names(Guerry),
                 selected=names(Guerry)[[5]]),
