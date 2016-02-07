@@ -1,13 +1,13 @@
 library(shiny)
 library(HistData)
-data("Guerry")
+data("Galton")
 
 shinyUI(pageWithSidebar(
-  headerPanel('Guerry k-means clustering'),
+  headerPanel('Galton k-means clustering'),
   sidebarPanel(
-    selectInput('xcol', 'X Variable', names(Guerry)),
-    selectInput('ycol', 'Y Variable', names(Guerry),
-                selected=names(Guerry)[[5]]),
+    selectInput('xcol', 'X Variable', names(Galton)),
+    selectInput('ycol', 'Y Variable', names(Galton),
+                selected=names(Galton)[[2]]),
     numericInput('clusters', 'Cluster count', 3,
                  min = 1, max = 9),
     helpText("For a description of the Guerry data set please",
